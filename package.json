@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/maxbook/nginx-remote#readme",
   "dependencies": {
-    "inquirer": "^1.0.2"
+    "inquirer": "^1.0.2",
+    "nginx-config-parser": "^0.1.1",
+    "underscore": "^1.8.3"
   }
 }
