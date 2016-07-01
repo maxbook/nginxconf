@@ -8,8 +8,8 @@
     "start": "node index.js"
   },
   "bin": {
-+   "ngconf": "./index.js"
-+ },
+    "ngconf": "./index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxbook/nginx-remote.git"
