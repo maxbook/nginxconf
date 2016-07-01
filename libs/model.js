@@ -6,6 +6,7 @@ const _ = require('underscore');
 function createWithModel(callback) {
   let models = fs.readdirSync('./models');
   let templateString = "";
+  let filename = '';
 
   function findVarNameInTpl(tplString) {
       let re = /<%=(.+?)%>/g;
@@ -23,31 +24,48 @@ function createWithModel(callback) {
       return results;
   }
 
-  const choseModel = [{
-      type: 'list',
-      name: 'model',
-      message: 'Quel model à utiliser ?',
-      choices: models
-  }];
+  function getName() {
+    const questionName = [{
+        type: 'input',
+        name: 'filename',
+        message: 'Nom du fichier .conf'
+    }];
+    return inquirer.prompt(questionName);
+  }
 
-  inquirer.prompt(choseModel)
-    .then((answser)=> {
-      templateString = fs.readFileSync('./models/'+answser.model, 'UTF-8');
-      let tplVarNames = findVarNameInTpl(templateString);
-      let varTplQuestions = [];
-      for (var i = 0; i < tplVarNames.length; i++) {
-        varTplQuestions.push({
-          type: 'input',
-          name: tplVarNames[i],
-          message: `Entrez la valeur pour "${tplVarNames[i]}"`
-        });
-      }
-      return inquirer.prompt(varTplQuestions);
-    })
+  function getModel(questionName) {
+    filename = questionName.filename;
+    const choseModel = [{
+        type: 'list',
+        name: 'model',
+        message: 'Quel model à utiliser ?',
+        choices: models
+    }];
+    return inquirer.prompt(choseModel);
+  }
+
+  function getVarTpl(answserModel) {
+    templateString = fs.readFileSync('./models/'+answserModel.model, 'UTF-8');
+    let tplVarNames = findVarNameInTpl(templateString);
+    let varTplQuestions = [];
+    for (var i = 0; i < tplVarNames.length; i++) {
+      varTplQuestions.push({
+        type: 'input',
+        name: tplVarNames[i],
+        message: `Entrez la valeur pour "${tplVarNames[i]}"`
+      });
+    }
+    return inquirer.prompt(varTplQuestions);
+  }
+
+  getName()
+    .then(getModel)
+    .then(getVarTpl)
     .then((answer)=>{
       let compiled = _.template(templateString);
-      callback(compiled(answer))
+      callback(filename, compiled(answer))
     });
+
 }
 
 module.exports.createWithModel = createWithModel;

@@ -1,13 +1,25 @@
 "use strict"
 const inquirer = require('inquirer');
 const fs = require('fs');
-const ncp = require('nginx-config-parser');
 const _ = require('underscore');
+const exec = require('child_process').exec;
+
+const config = {
+  siteAvailablePath : '/etc/nginx/site-available',
+  siteEnablePath : '/etc/nginx/site-enable'
+}
 
 const model = require('./libs/model.js');
 
-let serveurs_config = require('./serveurs.conf.json');
+model.createWithModel(function(filename,compiledModel) {
+  let siteAvaiblePath = `${config.siteAvailablePath}/${filename}.conf`;
+  let siteEnablePath = `${config.siteEnablePath}/${filename}.conf`;
 
-model.createWithModel(function(compiledModel) {
-  console.log(compiledModel);
+  fs.writeFile(siteAvaiblePath, compiledModel, function(err) {
+    if (err) throw err;
+    exec(`ln -s ${siteAvaiblePath} ${siteEnablePath} && service nginx reload`, function(err, stdout, stderr) {
+      if (err) throw err;
+      console.log('Configuration activée avec succes !');
+    });
+  });
 });
