@@ -1,14 +1,12 @@
 {
-  "name": "nginx-remote",
-  "version": "1.0.0",
+  "name": "nginxconf",
+  "version": "1.0.6",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "bin": {
-    "ngconf": "./index.js"
+    "nginxconf": "./lib/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +17,7 @@
   "bugs": {
     "url": "https://github.com/maxbook/nginx-remote/issues"
   },
+  "preferGlobal": "true",
   "homepage": "https://github.com/maxbook/nginx-remote#readme",
   "dependencies": {
     "inquirer": "^1.0.2",
