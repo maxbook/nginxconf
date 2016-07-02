@@ -1,16 +1,13 @@
 {
   "name": "nginxconf",
-  "version": "1.0.6",
-  "description": "",
-  "scripts": {
-    "start": "node index.js"
-  },
+  "version": "1.0.16",
+  "description": "Ultility for create nginx configuration file easily",
   "bin": {
     "nginxconf": "./lib/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxbook/nginx-remote.git"
+    "url": "git+https://github.com/maxbook/nginxconf.git"
   },
   "author": "",
   "license": "ISC",
@@ -18,10 +15,9 @@
     "url": "https://github.com/maxbook/nginx-remote/issues"
   },
   "preferGlobal": "true",
-  "homepage": "https://github.com/maxbook/nginx-remote#readme",
+  "homepage": "https://github.com/maxbook/nginxconf#readme",
   "dependencies": {
     "inquirer": "^1.0.2",
-    "nginx-config-parser": "^0.1.1",
     "underscore": "^1.8.3"
   }
 }
