@@ -1,6 +1,6 @@
 # nginxconf
 
-Utility for create nginx configuration file (.conf) on ubuntu easily.
+Utility for create nginx configuration file (.conf) on ubuntu/debian easily.
 
 Nginxconf create and enable nginx .conf files based on models.
 
@@ -34,8 +34,8 @@ server {
 	proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
     }
 }
 ```
