@@ -12,7 +12,7 @@ npm install -g nginxconf
 ```
 or with yarn
 ```bash
-yarn global add
+yarn global add nginxconf
 ```
 
 ## How to use
