@@ -6,8 +6,13 @@ Nginxconf create and enable nginx .conf files based on models.
 
 ## How to install
 
+with npm
 ```bash
-sudo npm install -g nginxconf
+npm install -g nginxconf
+```
+or with yarn
+```bash
+yarn global add
 ```
 
 ## How to use
