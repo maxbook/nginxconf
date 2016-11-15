@@ -30,7 +30,7 @@ Nginxconf create and enable nginx .conf files based on templated models in model
 reverse.conf
 ```
 server {
-    listen *:<%= listen %>;
+    listen <%= listen %>;
 
     server_name www.<%= server_name %> <%= server_name %>;
 
